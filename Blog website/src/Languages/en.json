@@ -1,0 +1,20 @@
+{
+    "search": "Search",
+    "home": "Home",
+    "categories":"Categories",
+    "blogs":"Blogs",
+    "about": "About",
+    "contact": "Contact",
+    "title": "title",
+    "description": "description",
+    "content":"content",
+    "upload": "upload image",
+    "choose": "Choose image",
+    "noFile": "no image chosen",
+    "category": "category",
+    "required": "required *",
+    "submit": "Submit",
+    "login": "Log in",
+    "edit": "Edit",
+    "delete": "Delete"
+}

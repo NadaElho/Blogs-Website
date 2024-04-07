@@ -8,13 +8,17 @@ const Categories = (props) => {
   useEffect(() => {
     (async function () {
       let { data } = await axios.get("http://localhost:3000/api/v1/categories");
-      setCategories(data.data);
+      if (props.from == "home") {
+        setCategories(data.data.slice(0, 3));
+      } else {
+        setCategories(data.data);
+      }
     })();
   }, []);
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <h1 className="text-[#af7152] m-5 text-3xl font-bold">
-        {props.t("categories")}
+        {props.from ? props.t("some categories") : props.t("categories")}
       </h1>
       <div className="flex gap-2 flex-wrap justify-center">
         {categories &&
@@ -23,7 +27,10 @@ const Categories = (props) => {
               key={category._id}
               className="max-w-sm bg-white col-3 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
             >
-              <Link to={`/blogs/category/${category._id}`} className="link relative">
+              <Link
+                to={`/blogs/category/${category._id}`}
+                className="link relative"
+              >
                 <img
                   className="rounded-t-lg h-[255px] transition-opacity duration-300 hover:opacity-50"
                   src={`http://localhost:3000/uploads/${category.image}`}
@@ -35,7 +42,7 @@ const Categories = (props) => {
                 <Link to="#">
                   <h5
                     className={`mb-2 text-2xl font-bold tracking-tight text-[${category.color}]`}
-                    style={{'color': category.color}}
+                    style={{ color: category.color }}
                   >
                     {props.lang == "en" ? category.name_en : category.name_ar}
                   </h5>

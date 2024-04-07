@@ -37,6 +37,12 @@ const editBlog = async (req, res) => {
     }
 };
 
+const updateNumOfViews = async(req, res) =>{
+    const {id} = req.params;
+    await Blog.updateOne({_id: id},  { $inc: { views: 1 } }, { new: true }) 
+    res.status(200).send("No of views increased");
+}
+
 const getUserBlogs = async(req, res)=>{
     let data = await Blog.find({userId:req.params.id}).populate("category").populate("userId");
     res.status(200).send(data);
@@ -75,5 +81,6 @@ module.exports = {
     getUserBlogs,
     getBlogDetails,
     deleteBlog,
-    getCategoryBlogs
+    getCategoryBlogs,
+    updateNumOfViews
 }

@@ -1,24 +1,24 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoMoon, IoSunny } from "react-icons/io5";
-import { MdLanguage } from "react-icons/md";
+import { MdLanguage, MdAdd } from "react-icons/md";
 import { ImBlogger } from "react-icons/im";
 
 const Navbar = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchBy, setSearchBy] = useState("")
-  const navigate = useNavigate()
+  const [searchBy, setSearchBy] = useState("");
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleSearch = (e) =>{
+  const handleSearch = (e) => {
     setSearchBy(e.target.value);
     console.log(searchBy);
-    navigate(`/blogs/${searchBy}`)
-  }
-  
+    navigate(`/blogs/${searchBy}`);
+  };
+
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -32,7 +32,6 @@ const Navbar = (props) => {
           </span>
         </Link>
         <div className="flex md:order-2">
-         
           <div className="relative block">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
@@ -61,6 +60,12 @@ const Navbar = (props) => {
               value={searchBy}
             />
           </div>
+          <Link to="/blogs/blog" className="ms-2 flex items-center" title={props.t('add')}>
+            <MdAdd
+              size="1.5em"
+              style={{ color: props.dark == "dark" ? "white" : "gray" }}
+            />
+          </Link>
           <button onClick={props.darkModeHandler} className="mx-2">
             {props.dark == "dark" && (
               <IoSunny style={{ color: "white" }} size="1.25em" />

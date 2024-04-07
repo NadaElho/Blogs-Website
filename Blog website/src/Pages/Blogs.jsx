@@ -168,9 +168,14 @@ const Blogs = (props) => {
                         ? blog.category.name_en
                         : blog.category.name_ar}
                     </p>
-                    <span className="text-gray-700 dark:text-gray-400">
-                      {blog.date}
-                    </span>
+                    <div>
+                      <span className="text-gray-700 dark:text-gray-400">
+                        {blog.date}
+                      </span>
+                      <div className="text-gray-700 dark:text-gray-400 flex justify-start items-center gap-2">
+                        <FaRegEye /> <span title="number of views">{blog.views}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

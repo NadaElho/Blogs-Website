@@ -12,7 +12,7 @@ const register = async (req, res) => {
 
   const user = await findUserByEmail(email)
 
-  if (user) return res.send({ message: 'email already exists' })
+  if (user) return res.status(422).send({ message: 'email already exists' })
 
   const passHah = await bcrypt.hash(password, 10)
 

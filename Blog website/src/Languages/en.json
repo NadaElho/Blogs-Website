@@ -15,6 +15,22 @@
     "required": "required *",
     "submit": "Submit",
     "login": "Log in",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "invalid email": "Invalid email address",
+    "createAccount": "Join us now",
+    "noAccount": "Don't have an account?",
+    "register": "Sign up",
+    "haveAccount": "Do you have account?",
+    "loginNow": "Login Now",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "add": "Add Blog",
+    "popular": "Most Popular Blogs",
+    "some categories": "Some of Our Categories",
+    "logged": "You are logged in successfully ",
+    "registered": "You are signed up successfully ",
+    "exist": "This email already exist",
+    "invalid": "Incorrect email or password"
 }

@@ -55,9 +55,9 @@ function App() {
           t={t}
         />
         <Routes>
-          <Route path="/" element={<Home dark={dark} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Home dark={dark} t={t} lang={i18n.resolvedLanguage} />} />
+          <Route path="/login" element={<Login t={t} />} />
+          <Route path="/register" element={<Register t={t} />} />
           <Route
             path="/categories"
             element={<Categories t={t} lang={i18n.resolvedLanguage} />}

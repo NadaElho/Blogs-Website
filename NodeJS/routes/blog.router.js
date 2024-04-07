@@ -8,6 +8,7 @@ const {
   getBlogDetails,
   deleteBlog,
   getCategoryBlogs,
+  updateNumOfViews,
 } = require('../controllers/blogs.controller')
 const upload = require('../services/upload.service')
 const uploadImage = require('../services/cloudinary.service');
@@ -20,5 +21,6 @@ router.get('/category/:id', getCategoryBlogs)
 router.get('/user/:id', auth, getUserBlogs)
 router.post('/', upload.single('image'),uploadImage, auth, addNewBlog)
 router.patch('/:id',upload.single('image'), uploadImage, auth, editBlog)
+router.patch('/views/:id', updateNumOfViews)
 router.delete('/:id', auth, deleteBlog)
 module.exports = router

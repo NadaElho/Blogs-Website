@@ -15,7 +15,7 @@ const Blogs = (props) => {
   const [searchResult, setSearchResult] = useState([]);
   const [curPage, setCurPage] = useState(1);
   const [id, setId] = useState("");
-  const { cat_id, title } = useParams();
+  const { cat_id, title, user_id } = useParams();
   const userId = localStorage.getItem("id");
 
   const toggleMenu = (id) => {
@@ -27,6 +27,8 @@ const Blogs = (props) => {
     (async function () {
       let url = cat_id
         ? `http://localhost:3000/api/v1/blogs/category/${cat_id}`
+        : user_id
+        ? `http://localhost:3000/api/v1/blogs/user/${user_id}`
         : "http://localhost:3000/api/v1/blogs";
       try {
         const { data } = await axios.get(url);
@@ -77,10 +79,10 @@ const Blogs = (props) => {
   return (
     <div>
       <div className="flex flex-col items-center justify-center p-4">
-        <h1 className="text-[#af7152] m-5 text-3xl font-bold">
+        <h1 className="text-[#af7152] m-7 text-3xl font-bold">
           {props.t("blogs")}
         </h1>
-        <div className="flex gap-2 flex-wrap justify-center">
+        <div className="flex gap-4 flex-wrap justify-center">
           {toShowItems.length != 0
             ? toShowItems.map((blog) => (
                 <div
@@ -173,7 +175,9 @@ const Blogs = (props) => {
                         </span>
                         <div className="text-gray-700 dark:text-gray-400 flex justify-start items-center gap-2">
                           <FaRegEye />{" "}
-                          <span title="number of views">{blog.views} {props.t('views')}</span>
+                          <span title="number of views">
+                            {blog.views} {props.t("views")}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -183,7 +187,7 @@ const Blogs = (props) => {
             : [1, 2].map((ele, i) => {
                 return (
                   <div className="max-w-sm col-3" key={i}>
-                    <Skeleton className="w-[200px] md:w-[382px]" height={255}/>
+                    <Skeleton className="w-[200px] md:w-[382px]" height={255} />
                     <div className="p-5">
                       <div className="my-4">
                         <Skeleton />

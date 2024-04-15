@@ -23,10 +23,10 @@ const Categories = (props) => {
   
   return (
     <div className="flex flex-col items-center justify-center p-4">
-      <h1 className="text-[#af7152] m-5 text-3xl font-bold text-center">
+      <h1 className="text-[#af7152] m-7 text-3xl font-bold text-center">
         {props.from ? props.t("some categories") : props.t("categories")}
       </h1>
-      <div className="flex gap-2 flex-wrap justify-center">
+      <div className="flex gap-4 flex-wrap justify-center">
         {categories.length != 0 ?
           categories.map((category) => (
             <div

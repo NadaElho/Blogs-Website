@@ -82,6 +82,10 @@ function App() {
               element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
             />
             <Route
+              path="/blogs/user/:user_id"
+              element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
+            />
+            <Route
               path="/blogs/:title"
               element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
             />

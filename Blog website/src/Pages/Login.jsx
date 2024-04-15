@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import axios from "axios";
 import { useState } from "react";
-import img from "../assets/Login-amico.svg";
+import img from "../assets/Computer login-pana.svg";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 

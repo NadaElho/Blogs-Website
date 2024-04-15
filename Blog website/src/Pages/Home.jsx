@@ -45,22 +45,11 @@ const Home = (props) => {
   return (
     <div>
       <div className="mx-auto">
-        {/* <div className="userInfo">
-        <img
-          src={
-            userData.image
-              ? `http://localhost:3000/uploads/${userData.image}`
-              : img
-          }
-          alt="no im"
-        />
-        <h3>{userData.name || ""}</h3>
-      </div> */}
         <div className="flex flex-col items-center justify-center p-7">
-          <h1 className="text-[#af7152] m-5 text-3xl font-bold text-center">
+          <h1 className="text-[#af7152] m-7 text-3xl font-bold text-center">
             {props.t("popular")}
           </h1>
-          <div className="flex gap-2 flex-wrap justify-center">
+          <div className="flex gap-4 flex-wrap justify-center">
             {blogs.length != 0 ?
               blogs.map((blog) => (
                 <div
@@ -155,7 +144,7 @@ const Home = (props) => {
                         </span>
                         <div className="text-gray-700 dark:text-gray-400 flex justify-start items-center gap-2">
                           <FaRegEye />{" "}
-                          <span title="number of views">{blog.views}</span>
+                          <span title="number of views">{blog.views} {props.t("views")}</span>
                         </div>
                       </div>
                     </div>

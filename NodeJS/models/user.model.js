@@ -4,21 +4,25 @@ const userSchema = mongoose.Schema({
   name: {
     type: String,
     minLength: 3,
-    required: true
+    required: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   passHah: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
+  role: {
+    type: String,
+    default: 'user',
+  },
 })
 
 const User = mongoose.model('User', userSchema)

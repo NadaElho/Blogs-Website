@@ -4,7 +4,11 @@ import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import Footer from "../Components/Footer";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 const Home = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [id, setId] = useState("");
   const userId = localStorage.getItem("id");
 
@@ -52,12 +56,12 @@ const Home = (props) => {
         />
         <h3>{userData.name || ""}</h3>
       </div> */}
-        <div className="container flex flex-col items-center justify-center p-7">
+        <div className="flex flex-col items-center justify-center p-7">
           <h1 className="text-[#af7152] m-5 text-3xl font-bold text-center">
             {props.t("popular")}
           </h1>
           <div className="flex gap-2 flex-wrap justify-center">
-            {blogs &&
+            {blogs.length != 0 ?
               blogs.map((blog) => (
                 <div
                   key={blog._id}
@@ -157,7 +161,20 @@ const Home = (props) => {
                     </div>
                   </div>
                 </div>
-              ))}
+              )): [1, 2].map((ele, i) => {
+                return (
+                  <div className="max-w-sm col-3" key={i}>
+                    <Skeleton className="w-[200px] md:w-[382px]" height={255}/>
+                    <div className="p-5">
+                      <div className="my-4">
+                        <Skeleton />
+                      </div>
+                      <Skeleton />
+                      <Skeleton />
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
         <Categories t={props.t} lang={props.lang} from="home" />

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body{
+    min-height: 100% !important;
+}
 .link:hover .eye{
     display: block !important;
 }

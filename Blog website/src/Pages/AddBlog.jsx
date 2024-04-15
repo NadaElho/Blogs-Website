@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../interceptor";
 
 const AddBlog = (props) => {
   const [cats, setCats] = useState([]);
@@ -62,19 +63,11 @@ const AddBlog = (props) => {
                 formData.append("content", content);
                 formData.append("category", category);
                 formData.append("image", image);
-                // formData.append("image", image.data);
                 formData.append("userId", localStorage.getItem("id"));
                 try {
-                  const response = await axios.post(
-                    "http://localhost:3000/api/v1/blogs",
-                    formData,
-                    {
-                      headers: {
-                        "Content-Type": "multipart/form-data",
-                        jwt: localStorage.getItem("token"),
-                        "Access-Control-Allow-Origin": "*",
-                      },
-                    }
+                  const response = await axiosInstance.post(
+                    "/blogs",
+                    formData
                   );
                   navigate("/blogs");
                   toast.success("Blog added successfully");

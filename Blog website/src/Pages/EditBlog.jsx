@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 import img from "../assets/Blogging-amico.svg";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import axiosInstance from "../interceptor";
 
 const EditBlog = (props) => {
   const [cats, setCats] = useState([]);
@@ -86,15 +89,9 @@ const EditBlog = (props) => {
                   formData.append("userId", localStorage.getItem("id"));
                   console.log(blogData);
                   try {
-                    const response = await axios.patch(
-                      `http://localhost:3000/api/v1/blogs/${id}`,
-                      formData,
-                      {
-                        headers: {
-                          "Content-Type": "multipart/form-data",
-                          jwt: localStorage.getItem("token"),
-                        },
-                      }
+                    const response = await axiosInstance.patch(
+                      `/blogs/${id}`,
+                      formData
                     );
                     navigate("/blogs");
                     toast.success("Blog updated successfully");
@@ -239,7 +236,39 @@ const EditBlog = (props) => {
                 )}
               </Formik>
             ) : (
-              <h2>Loading blog data...</h2>
+              // <h2>Loading blog data...</h2>
+              <div className="max-w-sm mx-auto w-full h-screen">
+                <Skeleton width="full lg:w-1/2" />
+                <Skeleton className="mb-5" count={1} width={300} height={40} />
+                <Skeleton width="full lg:w-1/2" />
+                <Skeleton
+                  className="mb-5"
+                  count={1}
+                  width="full lg:w-1/2"
+                  height={40}
+                />
+                <Skeleton width="full lg:w-1/2" />
+                <Skeleton
+                  className="mb-5"
+                  count={1}
+                  width="full lg:w-1/2"
+                  height={100}
+                />
+                <Skeleton width="full lg:w-1/2" />
+                <Skeleton
+                  className="mb-5"
+                  count={1}
+                  width="full lg:w-1/2"
+                  height={40}
+                />
+                <Skeleton width="full lg:w-1/2" />
+                <Skeleton
+                  className="mb-5"
+                  count={1}
+                  width="full lg:w-1/2"
+                  height={40}
+                />
+              </div>
             )}
           </div>
         </div>

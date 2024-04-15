@@ -14,11 +14,15 @@ import PrivateRoute from "./ProtectedRoutes/privateRoute";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
+import Contact from "./Pages/Contact";
+import ForgotPassword from "./Pages/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword";
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 function App() {
   const { t, i18n } = useTranslation();
   const [dark, setDark] = useState(localStorage.getItem("dark") || "light");
-  
+
   useEffect(() => {
     dark == "dark"
       ? document.body.classList.add("dark")
@@ -45,51 +49,59 @@ function App() {
 
   return (
     <div className="rtl:font-noto ltr:font-sans dark:bg-gray-900 min-h-screen">
-      <div></div>
-      <BrowserRouter>
-        <ToastContainer />
-        <Navbar
-          darkModeHandler={darkModeHandler}
-          languageHandler={languageHandler}
-          dark={dark}
-          t={t}
-        />
-        <Routes>
-          <Route path="/" element={<Home dark={dark} t={t} lang={i18n.resolvedLanguage} />} />
-          <Route path="/login" element={<Login t={t} />} />
-          <Route path="/register" element={<Register t={t} />} />
-          <Route
-            path="/categories"
-            element={<Categories t={t} lang={i18n.resolvedLanguage} />}
+      <SkeletonTheme baseColor={dark == 'dark' ?  '#111827' : '#EEE'} highlightColor={dark == 'dark' ?  "#525252" : '#FFF'}>
+        <div></div>
+        <BrowserRouter>
+          <ToastContainer />
+          <Navbar
+            darkModeHandler={darkModeHandler}
+            languageHandler={languageHandler}
+            dark={dark}
+            t={t}
           />
-          <Route
-            path="/blogs"
-            element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
-          />
-          <Route
-            path="/blogs/category/:cat_id"
-            element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
-          />
-          <Route
-            path="/blogs/:title"
-            element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
-          />
-          <Route element={<PrivateRoute />}>
+          <Routes>
             <Route
-              path="/blogs/blog"
-              element={<AddBlog t={t} lang={i18n.resolvedLanguage} />}
+              path="/"
+              element={<Home dark={dark} t={t} lang={i18n.resolvedLanguage} />}
+            />
+            <Route path="/login" element={<Login t={t} />} />
+            <Route path="/register" element={<Register t={t} />} />
+            <Route path="/contact" element={<Contact t={t} />} />
+            <Route path="/forgot-password" element={<ForgotPassword t={t} />} />
+            <Route path="/reset-password" element={<ResetPassword t={t} />} />
+            <Route
+              path="/categories"
+              element={<Categories t={t} lang={i18n.resolvedLanguage} />}
             />
             <Route
-              path="/blog/:id"
-              element={<BlogDetails t={t} lang={i18n.resolvedLanguage} />}
+              path="/blogs"
+              element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
             />
             <Route
-              path="/blogs/blog/:id"
-              element={<EditBlog t={t} lang={i18n.resolvedLanguage} />}
+              path="/blogs/category/:cat_id"
+              element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
             />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route
+              path="/blogs/:title"
+              element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
+            />
+            <Route element={<PrivateRoute />}>
+              <Route
+                path="/blogs/blog"
+                element={<AddBlog t={t} lang={i18n.resolvedLanguage} />}
+              />
+              <Route
+                path="/blog/:id"
+                element={<BlogDetails t={t} lang={i18n.resolvedLanguage} />}
+              />
+              <Route
+                path="/blogs/blog/:id"
+                element={<EditBlog t={t} lang={i18n.resolvedLanguage} />}
+              />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </SkeletonTheme>
     </div>
   );
 }

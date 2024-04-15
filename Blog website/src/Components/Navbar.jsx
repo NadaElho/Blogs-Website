@@ -19,12 +19,20 @@ const Navbar = (props) => {
     navigate(`/blogs/${searchBy}`);
   };
 
+  const clickHandler = ()=>{
+    if(localStorage.getItem('token')){
+      localStorage.clear()
+      navigate('/')
+    }else{
+      navigate('/login')
+    }
+  }
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           to="/"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
+          className="flex items-center space-x-3 rtl:space-x-reverse rtl:text-left"
         >
           <ImBlogger style={{ color: "#af7152" }} />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -54,13 +62,17 @@ const Navbar = (props) => {
             <input
               type="text"
               id="search-navbar"
-              className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#af7152] focus:border-[#af7152] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#af7152] dark:focus:border-[#af7152]"
+              className="hidden md:block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#af7152] focus:border-[#af7152] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#af7152] dark:focus:border-[#af7152]"
               placeholder={props.t("search")}
               onChange={handleSearch}
               value={searchBy}
             />
           </div>
-          <Link to="/blogs/blog" className="ms-2 flex items-center" title={props.t('add')}>
+          <Link
+            to="/blogs/blog"
+            className="ms-2 flex items-center"
+            title={props.t("add")}
+          >
             <MdAdd
               size="1.5em"
               style={{ color: props.dark == "dark" ? "white" : "gray" }}
@@ -80,7 +92,11 @@ const Navbar = (props) => {
               size="1.25em"
             />
           </button>
-
+          <button onClick={clickHandler} className="text-[#af7152] mx-2 hidden md:block hover:text-white border border-[#af7152] hover:bg-[#af7152] focus:ring-4 focus:outline-none focus:ring-[#af7152] font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#af7152] dark:text-[#af7152] dark:hover:text-white dark:hover:bg-[#af7152] dark:focus:ring-yellow-900">
+            {localStorage.getItem("token")
+              ? props.t("logout")
+              : props.t("login")}
+          </button>
           <button
             type="button"
             onClick={toggleMenu}
@@ -112,7 +128,15 @@ const Navbar = (props) => {
           } w-full md:flex md:w-auto md:order-1`}
           id="navbar-search"
         >
-          <ul className="flex flex-col text-lg p-4 md:p-0 mt-4 w-screen md:w-fit font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="flex flex-col md:items-center  text-lg p-4 md:p-0 mt-4 w-screen md:w-fit font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <li><input
+              type="text"
+              id="search-navbar"
+              className="block md:hidden w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#af7152] focus:border-[#af7152] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#af7152] dark:focus:border-[#af7152]"
+              placeholder={props.t("search")}
+              onChange={handleSearch}
+              value={searchBy}
+            /></li>
             <li>
               <NavLink
                 to="/"
@@ -164,21 +188,6 @@ const Navbar = (props) => {
             </li>
             <li>
               <NavLink
-                to="/about"
-                style={({ isActive }) => ({
-                  color: isActive
-                    ? "#af7152"
-                    : props.dark == "dark"
-                    ? "white"
-                    : "black",
-                })}
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#af7152] md:p-0 dark:text-white md:dark:hover:text-[#af7152] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                {props.t("about")}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
                 to="/contact"
                 style={({ isActive }) => ({
                   color: isActive
@@ -191,6 +200,26 @@ const Navbar = (props) => {
               >
                 {props.t("contact")}
               </NavLink>
+            </li>
+            <li>
+              {/* <NavLink
+                to="/about"
+                style={({ isActive }) => ({
+                  color: isActive
+                    ? "#af7152"
+                    : props.dark == "dark"
+                    ? "white"
+                    : "black",
+                })}
+                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#af7152] md:p-0 dark:text-white md:dark:hover:text-[#af7152] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              >
+                {props.t("about")}
+              </NavLink> */}
+              <button onClick={clickHandler} className="text-[#af7152] block md:hidden my-2 mx-3 hover:text-white border border-[#af7152] hover:bg-[#af7152] focus:ring-4 focus:outline-none focus:ring-[#af7152] font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#af7152] dark:text-[#af7152] dark:hover:text-white dark:hover:bg-[#af7152] dark:focus:ring-yellow-900">
+                {localStorage.getItem("token")
+                  ? props.t("logout")
+                  : props.t("login")}
+              </button>
             </li>
           </ul>
         </div>

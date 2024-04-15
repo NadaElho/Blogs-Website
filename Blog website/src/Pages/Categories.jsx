@@ -2,9 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Categories = (props) => {
+
   let [categories, setCategories] = useState([]);
+  
   useEffect(() => {
     (async function () {
       let { data } = await axios.get("http://localhost:3000/api/v1/categories");
@@ -14,14 +18,16 @@ const Categories = (props) => {
         setCategories(data.data);
       }
     })();
+  
   }, []);
+  
   return (
     <div className="flex flex-col items-center justify-center p-4">
-      <h1 className="text-[#af7152] m-5 text-3xl font-bold">
+      <h1 className="text-[#af7152] m-5 text-3xl font-bold text-center">
         {props.from ? props.t("some categories") : props.t("categories")}
       </h1>
       <div className="flex gap-2 flex-wrap justify-center">
-        {categories &&
+        {categories.length != 0 ?
           categories.map((category) => (
             <div
               key={category._id}
@@ -33,7 +39,7 @@ const Categories = (props) => {
               >
                 <img
                   className="rounded-t-lg h-[255px] transition-opacity duration-300 hover:opacity-50"
-                  src={`http://localhost:3000/uploads/${category.image}`}
+                  src={category.image}
                   alt=""
                 />
                 <FaRegEye className="eye hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-3xl" />
@@ -54,7 +60,20 @@ const Categories = (props) => {
                 </p>
               </div>
             </div>
-          ))}
+          )) : [1, 2, 3].map((ele, i) => {
+            return (
+              <div className="max-w-sm col-3" key={i}>
+                <Skeleton className="w-[200px] md:w-[382px]" height={255}/>
+                <div className="p-5">
+                  <div className="my-4">
+                    <Skeleton />
+                  </div>
+                  <Skeleton />
+                  <Skeleton />
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

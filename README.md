@@ -1,9 +1,9 @@
 <h1 align="center">Blogs website <img src="https://user-images.githubusercontent.com/74038190/216122003-1c7d9078-357a-47f5-81c7-1c4f2552e143.png" alt="quill" width="35" /></h1>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=6000&pause=1000&color=af7152&multiline=true&width=1300&lines=Our+website+hosts+a+collection+of+article+on+various+topics.)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=6000&pause=1000&color=af7152&multiline=true&width=1300&lines=Blogs+website+hosts+a+collection+of+article+on+various+topics.)](https://git.io/typing-svg)
 
 ## 🔗 Links
-- [Live Demo](https://blogs-website-react.vercel.app/)
+- [Live Demo](https://661efbe86992491c0ddc6f2e--blogs-website-react.netlify.app)
   
 ## 🔗 Screenshots
 

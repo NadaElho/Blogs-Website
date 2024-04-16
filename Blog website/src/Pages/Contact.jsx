@@ -9,7 +9,7 @@ const Contact = (props) => {
 
   return (
     <div>
-      <div className="container my-16 mx-auto md:px-6">
+      <div className="container mx-auto md:px-6">
         <section className="mb-32">
           <div className="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat bg-[url('https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')]"></div>
           <div className="container px-6 md:px-12">
@@ -56,7 +56,7 @@ const Contact = (props) => {
                   ) => {
                     localStorage.setItem("email", email);
                     let res = await axios.post(
-                      "http://localhost:3000/api/v1/contact/",
+                      "https://blogs-node-ta7t.onrender.com/api/v1/contact/",
                       {
                         firstname,
                         lastname,

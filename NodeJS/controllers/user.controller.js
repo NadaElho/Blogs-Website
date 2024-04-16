@@ -65,7 +65,7 @@ const forgotPassword = async (req, res) => {
     expiresIn: '15m',
   })
 
-  const link = `http://localhost:5173/reset-password/${user._id}/${token}`
+  const link = `https://blogs-website-react.vercel.app/reset-password/${user._id}/${token}`
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

@@ -6,14 +6,13 @@ import { toast } from "react-toastify";
 
 const ForgotPassword = (props) => {
   const navigate = useNavigate();
+
   return (
     <div className="flex flex-row justify-center md:justify-evenly items-center min-h-[calc(100vh-70px)]">
       <img src={img} className="w-[420px] hidden md:block" alt="" />
-
       <div className="flex flex-col w-full md:w-1/2">
         <div className="relative py-3 sm:max-w-xl sm:mx-auto mt-5">
           <div className="absolute inset-0 bg-gradient-to-r from-[#d7b8a9] to-[#af7152] shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-
           <div className="relative sm:p-20 px-3 py-8 bg-white dark:bg-gray-800 shadow-lg sm:rounded-3xl ">
             <Formik
               initialValues={{ email: "" }}
@@ -32,7 +31,7 @@ const ForgotPassword = (props) => {
                 localStorage.setItem("email", email);
                 try {
                   let res = await axios.post(
-                    "http://localhost:3000/api/v1/users/password/forgotpassword",
+                    "https://blogs-node-ta7t.onrender.com/api/v1/users/password/forgotpassword",
                     {
                       email,
                     }

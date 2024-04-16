@@ -11,29 +11,35 @@ const BlogDetails = (props) => {
   const [blog, setBlog] = useState({});
   useEffect(() => {
     (async () => {
-      await axios.patch(`http://localhost:3000/api/v1/blogs/views/${id}`);
+      await axios.patch(
+        `https://blogs-node-ta7t.onrender.com/api/v1/blogs/views/${id}`
+      );
     })();
 
     (async () => {
       let { data } = await axios.get(
-        `http://localhost:3000/api/v1/blogs/${id}`
+        `https://blogs-node-ta7t.onrender.com/api/v1/blogs/${id}`
       );
       setBlog(data);
     })();
   }, [id]);
   return (
-    <div>
+    <div className="text-left">
       {blog._id ? (
         <div>
           <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
             <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">
               <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                 <header className="mb-4 lg:mb-6 not-format">
-                  <address className="flex items-center mb-6 not-italic">
-                    <div className="flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                  <address className="flex items-center mb-6 not-italic rtl:justify-end">
+                    <div className="flex rtl:flex-row-reverse items-center mr-3 text-sm text-gray-900 dark:text-white">
                       <img
                         className="mr-4 w-16 h-16 rounded-full"
-                        src={blog.userId.image ? blog.userId.image : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"}
+                        src={
+                          blog.userId.image
+                            ? blog.userId.image
+                            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                        }
                         alt=""
                       />
                       <div>
@@ -53,11 +59,7 @@ const BlogDetails = (props) => {
                           </span>
                         </p>
                         <p className="text-base text-gray-500 dark:text-gray-400">
-                          <time
-                            title="date"
-                          >
-                            {blog.date}
-                          </time>
+                          <time title="date">{blog.date}</time>
                         </p>
                       </div>
                     </div>
@@ -78,37 +80,35 @@ const BlogDetails = (props) => {
         </div>
       ) : (
         <div>
-        <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased">
-          <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">
-            <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-              <header className="mb-4 lg:mb-6 not-format">
-                <address className="flex items-center mb-6 not-italic">
-                  <div className="flex items-center mr-3 gap-3">
-                  <Skeleton width={63} height={63} circle={true}/>
-                    <div>
-                    <Skeleton count={3} width={130} height={10}/>
+          <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased">
+            <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">
+              <article className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                <header className="mb-4 lg:mb-6 not-format">
+                  <address className="flex items-center mb-6 not-italic">
+                    <div className="flex items-center mr-3 gap-3">
+                      <Skeleton width={63} height={63} circle={true} />
+                      <div>
+                        <Skeleton count={3} width={130} height={10} />
+                      </div>
                     </div>
-                  </div>
-                </address>
-                <h1 className="mb-4 text-3xl font-extrabold leading-tight text-[#af7152] lg:mb-6 lg:text-4xl">
-                <Skeleton/>
-                </h1>
-              </header>
-
-              <Skeleton className="my-3" count={3}/>
-
-              <div>
-              <Skeleton height={400} width="100%"/>
-              </div>
-              <p className="my-3">
-              <Skeleton count={7}/>
-              </p>
-            </article>
-          </div>
-        </main>
-      </div>
+                  </address>
+                  <h1 className="mb-4 text-3xl font-extrabold leading-tight text-[#af7152] lg:mb-6 lg:text-4xl">
+                    <Skeleton />
+                  </h1>
+                </header>
+                <Skeleton className="my-3" count={3} />
+                <div>
+                  <Skeleton height={400} width="100%" />
+                </div>
+                <p className="my-3">
+                  <Skeleton count={7} />
+                </p>
+              </article>
+            </div>
+          </main>
+        </div>
       )}
-      <Footer t={props.t}/>
+      <Footer t={props.t} />
     </div>
   );
 };

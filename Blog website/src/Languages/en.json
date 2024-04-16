@@ -55,5 +55,8 @@
     "linkedin": "Linked in",
     "github": "Github",
     "rights": "All Rights Reserved",
+    "youSure": "Are you sure you want to delete this blog?",
+    "sure": "Yes, I'm sure",
+    "cancel": "No, cancel",
     "blogDetails": "A blogs website is a platform where individuals or organizations can publish articles, stories, opinions, and other content on various topics to share with a wider audience."
 }

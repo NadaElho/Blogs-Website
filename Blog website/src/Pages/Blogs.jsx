@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import axiosInstance from "../interceptor";
+import Confirm from "./Confirm";
 
 const Blogs = (props) => {
   const [blogs, setBlogs] = useState([]);
@@ -17,7 +18,8 @@ const Blogs = (props) => {
   const [id, setId] = useState("");
   const { cat_id, title, user_id } = useParams();
   const userId = localStorage.getItem("id");
-
+  const [show, setShow] = useState(false);
+  const [idToDel, setIdToDel] = useState(null)
   const toggleMenu = (id) => {
     setId(id);
     setIsOpen(!isOpen);
@@ -26,10 +28,10 @@ const Blogs = (props) => {
   useEffect(() => {
     (async function () {
       let url = cat_id
-        ? `http://localhost:3000/api/v1/blogs/category/${cat_id}`
+        ? `https://blogs-node-ta7t.onrender.com/api/v1/blogs/category/${cat_id}` // Category blogs
         : user_id
-        ? `http://localhost:3000/api/v1/blogs/user/${user_id}`
-        : "http://localhost:3000/api/v1/blogs";
+        ? `https://blogs-node-ta7t.onrender.com/api/v1/blogs/user/${user_id}` // User blogs
+        : "https://blogs-node-ta7t.onrender.com/api/v1/blogs"; // All blogs
       try {
         const { data } = await axios.get(url);
         setBlogs(data);
@@ -41,6 +43,7 @@ const Blogs = (props) => {
     })();
   }, [del]);
 
+  //Serach by blog title
   useEffect(() => {
     handleSearch(blogs);
   }, [title]);
@@ -57,12 +60,14 @@ const Blogs = (props) => {
     }
   };
 
+  //Delete Blog
   const deleteBlog = async (id) => {
     await axiosInstance.delete(`/blogs/${id}`);
     toast("Blog deleted successfully");
     setDelete(!del);
   };
 
+  //Pagination
   let [pageNumbers, setPageNumbers] = useState([]);
   const paginationHandler = (toShowItems, curPage = 1) => {
     setCurPage(curPage);
@@ -70,14 +75,15 @@ const Blogs = (props) => {
     let noOfItemsInPage = 2;
     let noOfItems = toShowItems.length;
     let noOfPages = Math.ceil(noOfItems / noOfItemsInPage);
-    setPageNumbers([...Array(noOfPages).keys()].map((i) => i + 1)); //[...Array(5)] [undefined, undefined, undefined, undefined, undefined]
+    setPageNumbers([...Array(noOfPages).keys()].map((i) => i + 1));
     const indexOfLastItem = curPage * noOfItemsInPage;
     const indexOfFirstItem = indexOfLastItem - noOfItemsInPage;
     setToShowItems(toShowItems.slice(indexOfFirstItem, indexOfLastItem));
   };
 
   return (
-    <div>
+    <div className="relative">
+      <Confirm show={show} setShow = {setShow} deleteBlog={deleteBlog} idToDel={idToDel} t={props.t}/>
       <div className="flex flex-col items-center justify-center p-4">
         <h1 className="text-[#af7152] m-7 text-3xl font-bold">
           {props.t("blogs")}
@@ -139,7 +145,9 @@ const Blogs = (props) => {
                           </li>
                           <li>
                             <span
-                              onClick={() => deleteBlog(blog._id)}
+                              // onClick={() => deleteBlog(blog._id)}
+
+                              onClick={() => {setShow(true); setIdToDel(blog._id); setIsOpen(false)                              }}
                               className="block px-4 py-2 cursor-pointer text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                             >
                               {props.t("delete")}

@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoMoon, IoSunny } from "react-icons/io5";
 import { MdLanguage, MdAdd } from "react-icons/md";
 import { ImBlogger } from "react-icons/im";
+import AuthContext from "../AuthContext";
 
 const Navbar = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchBy, setSearchBy] = useState("");
+  const {setAuth} = useContext(AuthContext)
+
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -15,18 +18,21 @@ const Navbar = (props) => {
 
   const handleSearch = (e) => {
     setSearchBy(e.target.value);
-    console.log(searchBy);
-    navigate(`/blogs/${searchBy}`);
   };
 
-  const clickHandler = ()=>{
-    if(localStorage.getItem('token')){
-      localStorage.clear()
-      navigate('/')
-    }else{
-      navigate('/login')
+  useEffect(() => {
+    navigate(`/blogs/${searchBy}`);
+  }, [searchBy]);
+
+  const clickHandler = () => {
+    if (localStorage.getItem("token")) {
+      setAuth({"token": null})
+      localStorage.clear();
+      navigate("/");
+    } else {
+      navigate("/login");
     }
-  }
+  };
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -34,13 +40,18 @@ const Navbar = (props) => {
           to="/"
           className="flex items-center rtl:flex-row-reverse rtl:gap-2 space-x-3 rtl:space-x-reverse rtl:text-left"
         >
-          <ImBlogger style={{ color: "#af7152" }} />
+          {/* <ImBlogger style={{ color: "#af7152" }} /> */}
+          <img
+            className="w-[30px]"
+            src="https://user-images.githubusercontent.com/74038190/216122003-1c7d9078-357a-47f5-81c7-1c4f2552e143.png"
+            alt=""
+          />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Blogs
           </span>
         </Link>
         <div className="flex md:order-2">
-          <div className="relative block">
+          <div className="relative hidden md:block">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
                 className="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -62,7 +73,7 @@ const Navbar = (props) => {
             <input
               type="text"
               id="search-navbar"
-              className="hidden md:block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#af7152] focus:border-[#af7152] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#af7152] dark:focus:border-[#af7152]"
+              className=" w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#af7152] focus:border-[#af7152] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#af7152] dark:focus:border-[#af7152]"
               placeholder={props.t("search")}
               onChange={handleSearch}
               value={searchBy}
@@ -92,7 +103,10 @@ const Navbar = (props) => {
               size="1.25em"
             />
           </button>
-          <button onClick={clickHandler} className="text-[#af7152] mx-2 hidden md:block hover:text-white border border-[#af7152] hover:bg-[#af7152] focus:ring-4 focus:outline-none focus:ring-[#af7152] font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#af7152] dark:text-[#af7152] dark:hover:text-white dark:hover:bg-[#af7152] dark:focus:ring-yellow-900">
+          <button
+            onClick={clickHandler}
+            className="text-[#af7152] mx-2 hidden md:block hover:text-white border border-[#af7152] hover:bg-[#af7152] focus:ring-4 focus:outline-none focus:ring-[#af7152] font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#af7152] dark:text-[#af7152] dark:hover:text-white dark:hover:bg-[#af7152] dark:focus:ring-yellow-900"
+          >
             {localStorage.getItem("token")
               ? props.t("logout")
               : props.t("login")}
@@ -129,14 +143,36 @@ const Navbar = (props) => {
           id="navbar-search"
         >
           <ul className="flex flex-col md:items-center  text-lg p-4 md:p-0 mt-4 w-screen md:w-fit font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li><input
-              type="text"
-              id="search-navbar"
-              className="block md:hidden w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#af7152] focus:border-[#af7152] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#af7152] dark:focus:border-[#af7152]"
-              placeholder={props.t("search")}
-              onChange={handleSearch}
-              value={searchBy}
-            /></li>
+            <li>
+              <div className="relative block md:hidden">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg
+                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                  <span className="sr-only">Search icon</span>
+                </div>
+                <input
+                  type="text"
+                  id="search-navbar"
+                  className=" w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-[#af7152] focus:border-[#af7152] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-[#af7152] dark:focus:border-[#af7152]"
+                  placeholder={props.t("search")}
+                  onChange={handleSearch}
+                  value={searchBy}
+                />
+              </div>
+            </li>
             <li>
               <NavLink
                 to="/"
@@ -202,20 +238,10 @@ const Navbar = (props) => {
               </NavLink>
             </li>
             <li>
-              {/* <NavLink
-                to="/about"
-                style={({ isActive }) => ({
-                  color: isActive
-                    ? "#af7152"
-                    : props.dark == "dark"
-                    ? "white"
-                    : "black",
-                })}
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#af7152] md:p-0 dark:text-white md:dark:hover:text-[#af7152] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+              <button
+                onClick={clickHandler}
+                className="text-[#af7152] block md:hidden my-2 mx-3 hover:text-white border border-[#af7152] hover:bg-[#af7152] focus:ring-4 focus:outline-none focus:ring-[#af7152] font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#af7152] dark:text-[#af7152] dark:hover:text-white dark:hover:bg-[#af7152] dark:focus:ring-yellow-900"
               >
-                {props.t("about")}
-              </NavLink> */}
-              <button onClick={clickHandler} className="text-[#af7152] block md:hidden my-2 mx-3 hover:text-white border border-[#af7152] hover:bg-[#af7152] focus:ring-4 focus:outline-none focus:ring-[#af7152] font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:border-[#af7152] dark:text-[#af7152] dark:hover:text-white dark:hover:bg-[#af7152] dark:focus:ring-yellow-900">
                 {localStorage.getItem("token")
                   ? props.t("logout")
                   : props.t("login")}

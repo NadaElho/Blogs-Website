@@ -15,7 +15,8 @@ const Footer = (props) => {
                   to="/"
                   className="flex items-center rtl:flex-row-reverse rtl:gap-2 rtl:justify-end space-x-3 rtl:space-x-reverse rtl:text-left"
                 >
-                  <ImBlogger style={{ color: "#af7152" }} />
+                  {/* <ImBlogger style={{ color: "#af7152" }} /> */}
+                  <img className="w-[30px]" src="https://user-images.githubusercontent.com/74038190/216122003-1c7d9078-357a-47f5-81c7-1c4f2552e143.png" alt="" />
                   <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                     Blogs
                   </span>

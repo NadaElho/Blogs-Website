@@ -1,12 +1,12 @@
+import React from 'react';
 import {Outlet , Navigate} from 'react-router-dom'
 
-export let auth = {'token': window.localStorage.getItem("token") || ""}
+const Guard = ({ isAuthenticated }) => {
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
 
-const Guard=()=> {
-  return (
-    // auth.token ? <Outlet/> : navigate("/login") not work why??
-    auth.token ? <Outlet/> : <Navigate to="/login"/>
-  )
-}
+  return <Outlet/>;
+};
 
 export default Guard;

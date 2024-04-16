@@ -1,22 +1,23 @@
 import { Formik } from "formik";
-import axios from "axios";
-import { useState } from "react";
-import img from "../assets/Computer login-pana.svg";
-import { useNavigate, Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate, Link } from "react-router-dom";
+
+import img from "../assets/Computer login-pana.svg";
+import axios from "axios";
+import AuthContext from "../AuthContext";
 
 const Login = (props) => {
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
+  const {auth, setAuth} = useContext(AuthContext)
 
   return (
     <div className="flex flex-row justify-center md:justify-evenly items-center min-h-[calc(100vh-70px)]">
       <img src={img} className="w-[420px] hidden md:block" alt="" />
-
       <div className="flex flex-col w-full md:w-1/2">
         <div className="relative py-3 sm:max-w-xl sm:mx-auto mt-5">
           <div className="absolute inset-0 bg-gradient-to-r from-[#d7b8a9] to-[#af7152] shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-
           <div className="relative sm:p-20 px-3 py-8 bg-white dark:bg-gray-800 shadow-lg sm:rounded-3xl ">
             <Formik
               initialValues={{ email: "", password: "" }}
@@ -38,7 +39,7 @@ const Login = (props) => {
                 localStorage.setItem("email", email);
                 try {
                   let res = await axios.post(
-                    "http://localhost:3000/api/v1/users/login",
+                    "https://blogs-node-ta7t.onrender.com/api/v1/users/login",
                     {
                       password,
                       email,
@@ -46,6 +47,7 @@ const Login = (props) => {
                   );
                   console.log(res);
                   localStorage.setItem("token", res.data.token);
+                  setAuth({"token": res.data.token})
                   localStorage.setItem("id", res.data.id);
                   setErrMsg(res.data.message);
                   toast.success(props.t("logged"));
@@ -108,7 +110,7 @@ const Login = (props) => {
                     </div>
                   </div>
                   <div>{errMsg}</div>
-                  <Link to="/forgot-password">{props.t("forgotPassword")}</Link>
+                  <Link to="/forgot-password" className="dark:text-white">{props.t("forgotPassword")}</Link>
                   <button
                     type="submit"
                     disabled={isSubmitting}

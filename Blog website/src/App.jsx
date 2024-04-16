@@ -1,4 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { SkeletonTheme } from "react-loading-skeleton";
+import { ToastContainer } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import { useContext, useEffect, useState } from "react";
+
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
@@ -7,23 +12,19 @@ import BlogDetails from "./Pages/BlogDetails";
 import Blogs from "./Pages/Blogs";
 import Categories from "./Pages/Categories";
 import AddBlog from "./Pages/AddBlog";
-import Navbar from "./Components/Navbar";
-
-import PrivateRoute from "./ProtectedRoutes/privateRoute";
-
-import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
 import Contact from "./Pages/Contact";
 import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
-import { SkeletonTheme } from "react-loading-skeleton";
 import CheckEmail from "./Pages/CheckEmail";
-import Guard from "./ProtectedRoutes/guard";
+import Navbar from "./Components/Navbar";
+import PrivateRoute from "./ProtectedRoutes/PrivateRoute"
+import Guard from "./ProtectedRoutes/Guard";
+import AuthContext from "./AuthContext";
 
 function App() {
   const { t, i18n } = useTranslation();
   const [dark, setDark] = useState(localStorage.getItem("dark") || "light");
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     dark == "dark"
@@ -38,10 +39,12 @@ function App() {
       ? i18n.changeLanguage("ar")
       : i18n.changeLanguage("en");
   };
+
   const rootHtml = document.getElementById("root");
   if (rootHtml) {
     rootHtml.setAttribute("dir", i18n.resolvedLanguage == "en" ? "ltr" : "rtl");
   }
+
   const darkModeHandler = () => {
     let newMode = dark == "light" ? "dark" : "light";
     setDark(newMode);
@@ -70,7 +73,7 @@ function App() {
               element={<Home dark={dark} t={t} lang={i18n.resolvedLanguage} />}
             />
             <Route path="/contact" element={<Contact t={t} />} />
-            <Route element={<PrivateRoute />}>
+            <Route element={<PrivateRoute isAuthenticated={auth.token} />}>
               <Route path="/login" element={<Login t={t} />} />
               <Route path="/register" element={<Register t={t} />} />
               <Route
@@ -103,15 +106,12 @@ function App() {
               path="/blogs/:title"
               element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
             />
-            <Route element={<Guard />}>
+            <Route element={<Guard isAuthenticated={auth.token} />}>
               <Route
                 path="/blogs/blog"
                 element={<AddBlog t={t} lang={i18n.resolvedLanguage} />}
               />
-              <Route
-                path="/blog/:id"
-                element={<BlogDetails t={t} lang={i18n.resolvedLanguage} />}
-              />
+              <Route path="/blog/:id" element={<BlogDetails t={t} />} />
               <Route
                 path="/blogs/blog/:id"
                 element={<EditBlog t={t} lang={i18n.resolvedLanguage} />}

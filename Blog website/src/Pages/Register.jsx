@@ -1,13 +1,15 @@
 import { Formik } from "formik";
-import axios from "axios";
-import img from "../assets/Mobile login-bro.svg";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+import img from "../assets/Mobile login-bro.svg";
+import axios from "axios";
 
 const Register = (props) => {
   const [err, setErr] = useState("");
   const navigate = useNavigate();
+
   return (
     <div className="flex flex-row justify-center md:justify-evenly items-center min-h-[calc(100vh-70px)]">
       <img src={img} className="w-[420px] hidden md:block" alt="" />
@@ -35,7 +37,7 @@ const Register = (props) => {
                   errors.password = props.t("required");
                 }
                 if (!values.image) {
-                  errors.image = "Requird";
+                  errors.image = props.t("required");
                 }
                 return errors;
               }}
@@ -46,7 +48,7 @@ const Register = (props) => {
                 localStorage.setItem("email", email);
                 try {
                   let res = await axios.post(
-                    "http://localhost:3000/api/v1/users/",
+                    "https://blogs-node-ta7t.onrender.com/api/v1/users/",
                     {
                       name,
                       password,

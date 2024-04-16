@@ -1,12 +1,13 @@
 import { Formik } from "formik";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
 import img from "../assets/Blogging-amico.svg";
+import axios from "axios";
+import axiosInstance from "../interceptor";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import axiosInstance from "../interceptor";
 
 const EditBlog = (props) => {
   const [cats, setCats] = useState([]);
@@ -20,16 +21,19 @@ const EditBlog = (props) => {
     category: "",
   });
   const { id } = useParams();
-  // const mode = id ? 'edit' : 'add'
+
   useEffect(() => {
+    //Select Box Options
     (async () => {
-      let { data } = await axios.get("http://localhost:3000/api/v1/categories");
+      let { data } = await axios.get(
+        "https://blogs-node-ta7t.onrender.com/api/v1/categories"
+      );
       setCats(data.data);
     })();
 
     (async () => {
       let { data } = await axios.get(
-        `http://localhost:3000/api/v1/blogs/${id}`
+        `https://blogs-node-ta7t.onrender.com/api/v1/blogs/${id}`
       );
       console.log(data);
       if (data.title) {

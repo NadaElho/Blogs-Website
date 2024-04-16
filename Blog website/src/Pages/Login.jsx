@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import axios from "axios";
 import { useState } from "react";
 import img from "../assets/Computer login-pana.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login = (props) => {
@@ -108,6 +108,7 @@ const Login = (props) => {
                     </div>
                   </div>
                   <div>{errMsg}</div>
+                  <Link to="/forgot-password">{props.t("forgotPassword")}</Link>
                   <button
                     type="submit"
                     disabled={isSubmitting}

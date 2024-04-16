@@ -17,7 +17,9 @@ import { ToastContainer } from "react-toastify";
 import Contact from "./Pages/Contact";
 import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
-import { SkeletonTheme } from 'react-loading-skeleton';
+import { SkeletonTheme } from "react-loading-skeleton";
+import CheckEmail from "./Pages/CheckEmail";
+import Guard from "./ProtectedRoutes/guard";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -49,7 +51,10 @@ function App() {
 
   return (
     <div className="rtl:font-noto ltr:font-sans dark:bg-gray-900 min-h-screen">
-      <SkeletonTheme baseColor={dark == 'dark' ?  '#111827' : '#EEE'} highlightColor={dark == 'dark' ?  "#525252" : '#FFF'}>
+      <SkeletonTheme
+        baseColor={dark == "dark" ? "#111827" : "#EEE"}
+        highlightColor={dark == "dark" ? "#525252" : "#FFF"}
+      >
         <div></div>
         <BrowserRouter>
           <ToastContainer />
@@ -64,11 +69,20 @@ function App() {
               path="/"
               element={<Home dark={dark} t={t} lang={i18n.resolvedLanguage} />}
             />
-            <Route path="/login" element={<Login t={t} />} />
-            <Route path="/register" element={<Register t={t} />} />
             <Route path="/contact" element={<Contact t={t} />} />
-            <Route path="/forgot-password" element={<ForgotPassword t={t} />} />
-            <Route path="/reset-password" element={<ResetPassword t={t} />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/login" element={<Login t={t} />} />
+              <Route path="/register" element={<Register t={t} />} />
+              <Route
+                path="/forgot-password"
+                element={<ForgotPassword t={t} />}
+              />
+              <Route
+                path="/reset-password/:id/:token"
+                element={<ResetPassword t={t} />}
+              />
+              <Route path="/check-email" element={<CheckEmail t={t} />} />
+            </Route>
             <Route
               path="/categories"
               element={<Categories t={t} lang={i18n.resolvedLanguage} />}
@@ -89,7 +103,7 @@ function App() {
               path="/blogs/:title"
               element={<Blogs t={t} lang={i18n.resolvedLanguage} />}
             />
-            <Route element={<PrivateRoute />}>
+            <Route element={<Guard />}>
               <Route
                 path="/blogs/blog"
                 element={<AddBlog t={t} lang={i18n.resolvedLanguage} />}

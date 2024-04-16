@@ -21,6 +21,7 @@
     "password": "Password",
     "invalid email": "Invalid email address",
     "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot password?",
     "checkEmail": "Check your Email",
     "match": "Password inputs don't match",
     "reset": "Reset password",
@@ -47,5 +48,12 @@
     "recommend": "Don't hesitates to cantact us to recommend new categories",
     "error": "Error happened",
     "views": "views",
-    "you": "You"
+    "you": "You",
+    "links": "Links",
+    "social": "Social Media",
+    "facebook": "Facebook",
+    "linkedin": "Linked in",
+    "github": "Github",
+    "rights": "All Rights Reserved",
+    "blogDetails": "A blogs website is a platform where individuals or organizations can publish articles, stories, opinions, and other content on various topics to share with a wider audience."
 }

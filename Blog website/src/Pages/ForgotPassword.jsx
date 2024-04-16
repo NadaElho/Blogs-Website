@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import axios from "axios";
-import img from "../assets/Login-amico.svg";
+import img from "../assets/Forgot password-amico.svg";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -80,7 +80,7 @@ const ForgotPassword = (props) => {
                     disabled={isSubmitting}
                     className="text-[#af7152] mt-5 hover:text-white border border-[#af7152] hover:bg-[#af7152] focus:ring-4 focus:outline-none focus:ring-[#af7152] font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-[#af7152] dark:text-[#af7152] dark:hover:text-white dark:hover:bg-[#af7152] dark:focus:ring-yellow-900"
                   >
-                    {props.t("login")}
+                    {props.t("submit")}
                   </button>
                 </form>
               )}

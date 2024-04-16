@@ -32,7 +32,7 @@ const Navbar = (props) => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           to="/"
-          className="flex items-center space-x-3 rtl:space-x-reverse rtl:text-left"
+          className="flex items-center rtl:flex-row-reverse rtl:gap-2 space-x-3 rtl:space-x-reverse rtl:text-left"
         >
           <ImBlogger style={{ color: "#af7152" }} />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">

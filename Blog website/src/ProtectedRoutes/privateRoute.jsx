@@ -1,12 +1,10 @@
+import React from 'react'
 import {Outlet , Navigate} from 'react-router-dom'
+import {auth} from './guard'
 
-let auth={'token': window.localStorage.getItem("token") || ""}
-
-const PrivateRoute=()=> {
-  return (
-    // auth.token ? <Outlet/> : navigate("/login") not work why??
-    auth.token ? <Outlet/> : <Navigate to="/login"/>
-  )
+const PrivateRoute = () => {
+    return (
+      auth.token ?  <Navigate to="/" /> : <Outlet/>
+    )
 }
-
-export default PrivateRoute;
+export default PrivateRoute

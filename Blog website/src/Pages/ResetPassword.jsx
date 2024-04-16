@@ -1,12 +1,13 @@
 import { Formik } from "formik";
 import axios from "axios";
 import { useState } from "react";
-import img from "../assets/Login-amico.svg";
-import { useNavigate } from "react-router-dom";
+import img from "../assets/Reset password-pana.svg";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ResetPassword = (props) => {
   const navigate = useNavigate();
+  const {id, token} = useParams();
   return (
     <div className="flex flex-row justify-center md:justify-evenly items-center min-h-[calc(100vh-70px)]">
       <img src={img} className="w-[420px] hidden md:block" alt="" />
@@ -34,7 +35,7 @@ const ResetPassword = (props) => {
               onSubmit={async ({ password }, { setSubmitting }) => {
                 try {
                   let res = await axios.post(
-                    "http://localhost:3000/api/v1/users/password/resetpassword",
+                    `http://localhost:3000/api/v1/users/password/reset-password/${id}/${token}`,
                     {
                       password,
                     }

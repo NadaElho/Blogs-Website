@@ -9,11 +9,12 @@
 
 <div align="center">
   
-  ![Macbook-Air-localhost](https://github.com/NadaElho/Blogs-Website/assets/90730411/1303b694-a8b0-478b-a042-92f0ed4e31ed)
+  ![Macbook-Air-localhost (2)](https://github.com/NadaElho/Blogs-Website/assets/90730411/ef54b65b-25bf-4daa-bb03-135f3798c781)
   
-  ![iPhone-11-PRO-MAX-localhost (2)](https://github.com/NadaElho/Blogs-Website/assets/90730411/4f10b60e-c4d4-4306-9adb-632ba120bd51)
-  ![iPhone-11-PRO-MAX-localhost](https://github.com/NadaElho/Blogs-Website/assets/90730411/e65e5015-9589-4ccc-ade0-8e8bbfd76fb5)
-  ![iPhone-11-PRO-MAX-localhost (1)](https://github.com/NadaElho/Blogs-Website/assets/90730411/5fb15132-825c-4a36-aca5-63759c1f6d8f)
+  ![iPhone-13-PRO-MAX-localhost](https://github.com/NadaElho/Blogs-Website/assets/90730411/08e71e9c-406b-41bb-a116-1b253494522c)
+  ![iPhone-13-PRO-MAX-localhost (1)](https://github.com/NadaElho/Blogs-Website/assets/90730411/983bdecf-ae19-4e0e-9f18-6b1406695a2b)
+  ![iPhone-13-PRO-MAX-localhost (2)](https://github.com/NadaElho/Blogs-Website/assets/90730411/d0423fed-3705-46e0-9e9a-d466f648490e)
+
 </div>
 
 ## 🔗 Website Features

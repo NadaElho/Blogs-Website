@@ -3,7 +3,7 @@
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=6000&pause=1000&color=af7152&multiline=true&width=1300&lines=Blogs+website+hosts+a+collection+of+article+on+various+topics.)](https://git.io/typing-svg)
 
 ## 🔗 Links
-- [Live Demo](https://blogs-react-website.vercel.app/)
+- [Live Demo](https://blogs-website-gamma.vercel.app/)
   
 ## 🔗 Screenshots
 

@@ -1,16 +1,11 @@
 const Category = require('../models/category.model')
+const { deleteImage } = require('../services/imagekit.service')
 
 const addCategory = async (req, res) => {
-  const { name_en, name_ar, color, description_en, description_ar } = req.body
-  const imageUrl = req.imageUrl;
-
+  console.log(req);
   await Category.create({
-    name_en,
-    name_ar,
-    color,
-    image: imageUrl,
-    description_en,
-    description_ar,
+    ...req.body,
+    fileId: req.fileId
   })
   res.status(201).send({ message: 'Category added successfully' })
 }
@@ -27,6 +22,7 @@ const deleteCategory = async (req, res) => {
         return res.status(404).send("category not found");
     }
     
+    await deleteImage(category.fileId)
     await Category.deleteOne({ _id: req.params.id });
 
     res.status(200).send("deleted successfully");
@@ -39,10 +35,9 @@ const deleteCategory = async (req, res) => {
 const editCategory = async (req, res) => {
   try {
       const { name_en, name_ar, description_en, description_ar, color } = req.body;
-      const imageUrl = req.imageUrl;
-      console.log(imageUrl);
-      if (imageUrl) {
-          await Category.updateOne({ _id: req.params.id }, { name_en, name_ar, description_en, description_ar, color, image: imageUrl });
+      
+      if (req.body.image) {
+          await Category.updateOne({ _id: req.params.id }, { name_en, name_ar, description_en, description_ar, color, image: req.body.image });
       } else {
           await Category.updateOne({ _id: req.params.id }, { name_en, name_ar, description_en, description_ar, color });
       }

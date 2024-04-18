@@ -1,5 +1,6 @@
 const Blog = require('../models/blog.model')
 const Category = require('../models/category.model')
+const { deleteImage } = require('../services/imagekit.service')
 
 const getBlogs = async (req, res) => {
   let blogs = await Blog.find().populate('category').populate('userId')
@@ -14,41 +15,34 @@ const getBlogDetails = async (req, res) => {
 }
 
 const addNewBlog = async (req, res) => {
-  const { title, description, userId, content, category } = req.body
-  const imageUrl = req.imageUrl
-
   var datetime = new Date().toISOString().slice(0, 10)
   await Blog.create({
-    title,
-    description,
-    userId,
-    image: imageUrl,
-    date: datetime,
-    content,
-    category,
+    ...req.body,
+    fileId: req.fileId,
   })
   res.status(201).send('Blog added successfully')
 }
 
 const editBlog = async (req, res) => {
   try {
-    const { title, description, content, category } = req.body
-    const imageUrl = req.imageUrl
-    console.log(imageUrl)
-    if (imageUrl) {
+    const { title, description, content, category, image } = req.body
+    const blog = await Blog.findOne({ _id: req.params.id });
+    if (image) {
+      await deleteImage(blog.fileId);
       await Blog.updateOne(
         { _id: req.params.id },
-        { title, description, image: imageUrl, content, category },
+        { title, description, image, content, category , fileId:req.fileId },
       )
     } else {
       await Blog.updateOne(
         { _id: req.params.id },
-        { title, description, content, category },
+        { title, description, content, category , fileId:req.fileId },
       )
     }
 
     res.status(200).send('Blog updated successfully')
   } catch (err) {
+    console.log(err);
     res.status(400).send('Error happened: ' + err.message)
   }
 }
@@ -80,6 +74,7 @@ const deleteBlog = async (req, res) => {
       return res.status(404).send('Blog not found')
     }
 
+    await deleteImage(blog.fileId)
     await Blog.deleteOne({ _id: req.params.id })
 
     res.status(200).send('deleted successfully')

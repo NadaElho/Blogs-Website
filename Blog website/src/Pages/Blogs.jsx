@@ -19,7 +19,7 @@ const Blogs = (props) => {
   const { cat_id, title, user_id } = useParams();
   const userId = localStorage.getItem("id");
   const [show, setShow] = useState(false);
-  const [idToDel, setIdToDel] = useState(null)
+  const [idToDel, setIdToDel] = useState(null);
   const toggleMenu = (id) => {
     setId(id);
     setIsOpen(!isOpen);
@@ -83,7 +83,13 @@ const Blogs = (props) => {
 
   return (
     <div className="relative">
-      <Confirm show={show} setShow = {setShow} deleteBlog={deleteBlog} idToDel={idToDel} t={props.t}/>
+      <Confirm
+        show={show}
+        setShow={setShow}
+        deleteBlog={deleteBlog}
+        idToDel={idToDel}
+        t={props.t}
+      />
       <div className="flex flex-col items-center justify-center p-4">
         <h1 className="text-[#af7152] m-7 text-3xl font-bold">
           {props.t("blogs")}
@@ -147,7 +153,11 @@ const Blogs = (props) => {
                             <span
                               // onClick={() => deleteBlog(blog._id)}
 
-                              onClick={() => {setShow(true); setIdToDel(blog._id); setIsOpen(false)                              }}
+                              onClick={() => {
+                                setShow(true);
+                                setIdToDel(blog._id);
+                                setIsOpen(false);
+                              }}
                               className="block px-4 py-2 cursor-pointer text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                             >
                               {props.t("delete")}

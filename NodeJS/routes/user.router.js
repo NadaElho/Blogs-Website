@@ -7,12 +7,14 @@ const {
   getResetPassword,
   forgotPassword,
 } = require('../controllers/user.controller');
+const { uploadImage, resizeImage } = require('../services/upload.service');
+const { imagekitUpload } = require('../services/imagekit.service');
 
-const upload = require('../services/upload.service');
+// const upload = require('../services/upload.service');
 const router = express.Router()
-const uploadImage = require('../services/cloudinary.service');
+// const uploadImage = require('../services/cloudinary.service');
 
-router.post('/', upload.single('image'), uploadImage, register)
+router.post('/', uploadImage, resizeImage, imagekitUpload, register)
 router.post('/login', login)
 router.get('/:email', getUserByEmail)
 router.post("/password/forgotpassword", forgotPassword)

@@ -1,13 +1,6 @@
 import React from 'react';
 import {Outlet , Navigate} from 'react-router-dom'
 
-const PrivateRoute = ({ isAuthenticated }) => {
-  console.log(isAuthenticated);
-  if (isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-
-  return <Outlet/>;
-};
+const PrivateRoute = ({ isAuthenticated }) =>  (isAuthenticated) ? <Navigate to="/" /> : <Outlet/>
 
 export default PrivateRoute;

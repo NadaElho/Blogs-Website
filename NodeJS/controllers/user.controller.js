@@ -6,8 +6,7 @@ const User = require('../models/user.model')
 const nodemailer = require('nodemailer')
 
 const register = async (req, res) => {
-  const { name, email, password } = req.body
-  const imageUrl = req.imageUrl
+  const { name, email, password, image } = req.body
   if (!email || !password) {
     return res.status(422).send({ message: 'missing email or password' })
   }
@@ -22,7 +21,8 @@ const register = async (req, res) => {
     name,
     email,
     passHah,
-    image: imageUrl,
+    image,
+    fileId: req.fileId
   })
 
   res.send(newUser)
@@ -65,7 +65,7 @@ const forgotPassword = async (req, res) => {
     expiresIn: '15m',
   })
 
-  const link = `https://blogs-website-react.vercel.app/reset-password/${user._id}/${token}`
+  const link = `https://blogs-website-gamma.vercel.app/reset-password/${user._id}/${token}`
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

@@ -10,7 +10,7 @@ import AuthContext from "../AuthContext";
 const Login = (props) => {
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
-  const {auth, setAuth} = useContext(AuthContext)
+  const { auth, setAuth } = useContext(AuthContext);
 
   return (
     <div className="flex flex-row justify-center md:justify-evenly items-center min-h-[calc(100vh-70px)]">
@@ -47,7 +47,7 @@ const Login = (props) => {
                   );
                   console.log(res);
                   localStorage.setItem("token", res.data.token);
-                  setAuth({"token": res.data.token})
+                  setAuth({ token: res.data.token });
                   localStorage.setItem("id", res.data.id);
                   setErrMsg(res.data.message);
                   toast.success(props.t("logged"));
@@ -110,7 +110,9 @@ const Login = (props) => {
                     </div>
                   </div>
                   <div>{errMsg}</div>
-                  <Link to="/forgot-password" className="dark:text-white">{props.t("forgotPassword")}</Link>
+                  <Link to="/forgot-password" className="dark:text-white">
+                    {props.t("forgotPassword")}
+                  </Link>
                   <button
                     type="submit"
                     disabled={isSubmitting}

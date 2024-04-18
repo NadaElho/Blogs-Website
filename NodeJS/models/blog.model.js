@@ -31,6 +31,9 @@ const blogSchema = mongoose.Schema({
   views:{
     type: Number,
     default: 0
+  },
+  fileId: {
+    type: String
   }
 })
 

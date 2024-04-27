@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import img from "../assets/Blogging-amico.svg";
+import img from "/Blogging-amico.svg";
 import axiosInstance from "../interceptor";
 import axios from "axios";
 

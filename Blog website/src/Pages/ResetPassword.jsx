@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import axios from "axios";
-import img from "../assets/Reset password-pana.svg";
+import img from "/Reset password-pana.svg";
 
 const ResetPassword = (props) => {
   const navigate = useNavigate();

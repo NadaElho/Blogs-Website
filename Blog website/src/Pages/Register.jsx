@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import img from "../assets/Mobile login-bro.svg";
+import img from "/Mobile login-bro.svg";
 import axios from "axios";
 
 const Register = (props) => {

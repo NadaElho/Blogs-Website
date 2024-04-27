@@ -4,6 +4,7 @@ require('./db')
 const express = require('express')
 const cors = require('cors')
 
+const { auth } = require('./middleware/auth.js')
 const userRouter = require('./routes/user.router.js')
 const blogRouter = require('./routes/blog.router.js')
 const catRouter = require('./routes/category.router.js')

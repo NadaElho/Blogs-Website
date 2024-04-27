@@ -6,7 +6,8 @@ const User = require('../models/user.model')
 const nodemailer = require('nodemailer')
 
 const register = async (req, res) => {
-  const { name, email, password, image } = req.body
+  const { name, email, password } = req.body
+  const imageUrl = req.imageUrl
   if (!email || !password) {
     return res.status(422).send({ message: 'missing email or password' })
   }
@@ -21,8 +22,7 @@ const register = async (req, res) => {
     name,
     email,
     passHah,
-    image,
-    fileId: req.fileId
+    image: imageUrl,
   })
 
   res.send(newUser)

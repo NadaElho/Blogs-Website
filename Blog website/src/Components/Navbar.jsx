@@ -8,7 +8,7 @@ import AuthContext from "../AuthContext";
 const Navbar = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchBy, setSearchBy] = useState("");
-  const {setAuth} = useContext(AuthContext)
+  const { setAuth } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -21,12 +21,15 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    navigate(`/blogs/${searchBy}`);
+    if(searchBy){
+      navigate(`/blogs/${searchBy}`);
+    }
+    console.log(searchBy);
   }, [searchBy]);
 
   const clickHandler = () => {
     if (localStorage.getItem("token")) {
-      setAuth({"token": null})
+      setAuth({ token: null });
       localStorage.clear();
       navigate("/");
     } else {

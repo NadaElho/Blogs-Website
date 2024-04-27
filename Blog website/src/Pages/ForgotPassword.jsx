@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import axios from "axios";
-import img from "../assets/Forgot password-amico.svg";
+import img from "/Forgot password-amico.svg";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 

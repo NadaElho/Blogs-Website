@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 
-import img from "../assets/Computer login-pana.svg";
+import img from "/Computer login-pana.svg";
 import axios from "axios";
 import AuthContext from "../AuthContext";
 

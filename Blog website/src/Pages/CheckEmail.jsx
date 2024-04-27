@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../assets/New message-amico.svg";
+import image from "/New message-amico.svg";
 const CheckEmail = (props) => {
   return (
     <div className="flex flex-col justify-center items-center h-[calc(100vh-70px)]">

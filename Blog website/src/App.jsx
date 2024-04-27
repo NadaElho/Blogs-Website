@@ -17,9 +17,10 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
 import CheckEmail from "./Pages/CheckEmail";
 import Navbar from "./Components/Navbar";
-import PrivateRoute from "./ProtectedRoutes/PrivateRoute"
+import PrivateRoute from "./ProtectedRoutes/PrivateRoute";
 import Guard from "./ProtectedRoutes/Guard";
 import AuthContext from "./AuthContext";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -61,12 +62,18 @@ function App() {
         <div></div>
         <BrowserRouter>
           <ToastContainer />
-          <Navbar
-            darkModeHandler={darkModeHandler}
-            languageHandler={languageHandler}
-            dark={dark}
-            t={t}
-          />
+          {location.pathname != "/login" &&
+            location.pathname != "/register" &&
+            location.pathname != "/forgot-password" &&
+            location.pathname != "/check-email" &&
+            !location.pathname.startsWith("/reset-password") && (
+              <Navbar
+                darkModeHandler={darkModeHandler}
+                languageHandler={languageHandler}
+                dark={dark}
+                t={t}
+              />
+            )}
           <Routes>
             <Route
               path="/"
@@ -117,6 +124,7 @@ function App() {
                 element={<EditBlog t={t} lang={i18n.resolvedLanguage} />}
               />
             </Route>
+            <Route path="*" element={<NotFound t={t}/>}/>
           </Routes>
         </BrowserRouter>
       </SkeletonTheme>

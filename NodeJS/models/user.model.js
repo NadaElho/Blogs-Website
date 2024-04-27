@@ -23,9 +23,6 @@ const userSchema = mongoose.Schema({
     type: String,
     default: 'user',
   },
-  fileId: {
-    type: String
-  }
 })
 
 const User = mongoose.model('User', userSchema)
